@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "459034477868",
+    "project_id": "attendo-58a72",
+    "storage_bucket": "attendo-58a72.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:459034477868:android:f2dddf1502afd9a9ec5889",
+        "android_client_info": {
+          "package_name": "com.example.attendo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "459034477868-ci7b9tc6mdujg0ok7j0utad0csdbg1f3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.attendo_app",
+            "certificate_hash": "21a36781190dc1a8aa35d001d70e9ff87dc3d5d8"
+          }
+        },
+        {
+          "client_id": "459034477868-qngr7vm8i07geridmhlfmt3e1vqkepb0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDx-3dZzFvZBqmcAaHJBi5XL5Qxuczjux4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "459034477868-qngr7vm8i07geridmhlfmt3e1vqkepb0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "459034477868-sjbkpfhlmb5c5ud9pp75rmv0c0jis1vo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.attendoApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
