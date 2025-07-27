@@ -82,15 +82,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     border: 2,
                     linearGradient: LinearGradient(
                       colors: [
-                        const Color(0xFFffffff).withOpacity(0.1),
-                        const Color(0xFFFFFFFF).withOpacity(0.05),
+                        Color.fromRGBO(255, 255, 255, 0.1),
+                        Color.fromRGBO(255, 255, 255, 0.05),
                       ],
                     ),
                     borderGradient: LinearGradient(
                       colors: [
-                        Colors.white.withOpacity(0.5),
-                        Colors.white.withOpacity(0.5),
-                      ],
+                          Color.fromRGBO(255, 255, 255, 0.5),
+                        Color.fromRGBO(255, 255, 255, 0.5),
+                      ]
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
@@ -176,7 +176,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         prefixIcon: Icon(icon, color: Colors.white70),
         labelStyle: const TextStyle(color: Colors.white70),
         filled: true,
-        fillColor: Colors.white.withOpacity(0.1),
+        fillColor: Color.fromRGBO(255, 255, 255, 0.1),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,

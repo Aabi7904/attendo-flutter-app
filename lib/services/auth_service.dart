@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:oktoast/oktoast.dart'; // Changed from fluttertoast
 import '../models/user_model.dart';
 import 'firestore_service.dart';
+import 'dart:developer';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -74,7 +75,7 @@ class AuthService {
       );
       return null;
     } catch (e) {
-      print("!! GOOGLE SIGN IN ERROR: $e");
+      log("!! GOOGLE SIGN IN ERROR: $e");
       showToast(
         "An unexpected error occurred.",
         position: ToastPosition.bottom,
@@ -117,7 +118,7 @@ class AuthService {
       );
       return null;
     } catch (e) {
-      print("AN UNEXPECTED ERROR OCCURRED: $e");
+      log("AN UNEXPECTED ERROR OCCURRED: $e");
       showToast(
         "An unexpected error occurred. Check debug console.",
         position: ToastPosition.bottom,

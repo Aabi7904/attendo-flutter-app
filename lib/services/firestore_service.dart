@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/subject_model.dart';
 import '../models/user_model.dart';
+import 'dart:developer';
 
 class FirestoreService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -14,7 +15,7 @@ class FirestoreService {
       }
       return null;
     } catch (e) {
-      print("Error getting user: $e");
+      log("Error getting user: $e");
       return null;
     }
   }

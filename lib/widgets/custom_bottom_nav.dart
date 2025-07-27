@@ -26,16 +26,16 @@ class CustomBottomNav extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            const Color(0xFFffffff).withOpacity(0.1),
-            const Color(0xFFFFFFFF).withOpacity(0.05),
+            Color.fromRGBO(255, 255, 255, 0.1),
+            Color.fromRGBO(255, 255, 255, 0.05),
           ],
         ),
         borderGradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Colors.white.withOpacity(0.5),
-            Colors.white.withOpacity(0.5),
+            Color.fromRGBO(255, 255, 255, 0.5),
+            Color.fromRGBO(255, 255, 255, 0.5),
           ],
         ),
         child: Row(
@@ -61,7 +61,7 @@ class CustomBottomNav extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.cyan.withOpacity(0.15) : Colors.transparent,
+          color: isSelected ? Color.fromRGBO(0, 255, 255, 0.15) : Colors.transparent,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Column(

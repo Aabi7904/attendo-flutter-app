@@ -86,8 +86,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                        const Color(0xFFffffff).withOpacity(0.1),
-                        const Color(0xFFFFFFFF).withOpacity(0.05),
+                        Color.fromRGBO(255, 255, 255, 0.1),
+                        Color.fromRGBO(255, 255, 255, 0.05),
                       ],
                       stops: const [0.1, 1],
                     ),
@@ -95,8 +95,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                        Colors.white.withOpacity(0.5),
-                        Colors.white.withOpacity(0.5),
+                        Color.fromRGBO(255, 255, 255, 0.5),
+                        Color.fromRGBO(255, 255, 255, 0.5),
                       ],
                     ),
                     child: Padding(
@@ -235,7 +235,7 @@ class _LoginScreenState extends State<LoginScreen> {
         prefixIcon: Icon(icon, color: Colors.white70),
         labelStyle: const TextStyle(color: Colors.white70),
         filled: true,
-        fillColor: Colors.white.withOpacity(0.1),
+        fillColor: const Color.fromRGBO(255, 255, 255, 0.1),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
