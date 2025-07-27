@@ -21,7 +21,9 @@ class _AttendanceMarkerScreenState extends State<AttendanceMarkerScreen> {
     final staffController = TextEditingController();
     final percentageController = TextEditingController(text: '75');
     final formKey = GlobalKey<FormState>();
-    final List<String> daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    final List<String> daysOfWeek = [
+      'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
+    ];
     final List<String> selectedDays = [];
 
     showDialog(
@@ -40,23 +42,26 @@ class _AttendanceMarkerScreenState extends State<AttendanceMarkerScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextFormField(
-                          controller: nameController,
-                          style: const TextStyle(color: Colors.white),
-                          decoration: const InputDecoration(labelText: 'Subject Name')),
+                        controller: nameController,
+                        style: const TextStyle(color: Colors.white),
+                        decoration: const InputDecoration(labelText: 'Subject Name'),
+                      ),
                       TextFormField(
-                          controller: staffController,
-                          style: const TextStyle(color: Colors.white),
-                          decoration: const InputDecoration(labelText: 'Staff Name')),
+                        controller: staffController,
+                        style: const TextStyle(color: Colors.white),
+                        decoration: const InputDecoration(labelText: 'Staff Name'),
+                      ),
                       TextFormField(
-                          controller: percentageController,
-                          style: const TextStyle(color: Colors.white),
-                          decoration: const InputDecoration(labelText: 'Required Percentage (%)'),
-                          keyboardType: TextInputType.number,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) return 'Cannot be empty';
-                            if (double.tryParse(value) == null) return 'Enter a valid number';
-                            return null;
-                          }),
+                        controller: percentageController,
+                        style: const TextStyle(color: Colors.white),
+                        decoration: const InputDecoration(labelText: 'Required Percentage (%)'),
+                        keyboardType: TextInputType.number,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) return 'Cannot be empty';
+                          if (double.tryParse(value) == null) return 'Enter a valid number';
+                          return null;
+                        },
+                      ),
                       const SizedBox(height: 20),
                       const Text("Select Days:", style: TextStyle(color: Colors.white70)),
                       const SizedBox(height: 8),
@@ -82,24 +87,33 @@ class _AttendanceMarkerScreenState extends State<AttendanceMarkerScreen> {
                             labelStyle: const TextStyle(color: Colors.black),
                           );
                         }).toList(),
-                      )
+                      ),
                     ],
                   ),
                 ),
               ),
               actions: [
-                TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text('Cancel'),
+                ),
                 ElevatedButton(
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        final requiredPercentage = double.parse(percentageController.text);
-                        _firestoreService.addSubject(
-                            nameController.text, staffController.text, currentUser!.uid, requiredPercentage, selectedDays);
-                        Navigator.of(context).pop();
-                        showToast('Subject Added!');
-                      }
-                    },
-                    child: const Text('Save')),
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      final requiredPercentage = double.parse(percentageController.text);
+                      _firestoreService.addSubject(
+                        nameController.text,
+                        staffController.text,
+                        currentUser!.uid,
+                        requiredPercentage,
+                        selectedDays,
+                      );
+                      Navigator.of(context).pop();
+                      showToast('Subject Added!');
+                    }
+                  },
+                  child: const Text('Save'),
+                ),
               ],
             );
           },
@@ -170,23 +184,27 @@ class _AttendanceMarkerScreenState extends State<AttendanceMarkerScreen> {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(subject.name, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                      Text(subject.name,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                          overflow: TextOverflow.ellipsis),
                       const SizedBox(height: 8),
                       Text("Attended: ${subject.attended}", style: const TextStyle(color: Colors.white70)),
                       Text("Missed: ${subject.missed}", style: const TextStyle(color: Colors.white70)),
                       Text("Total: $totalClasses", style: const TextStyle(color: Colors.white70)),
                       const SizedBox(height: 8),
                       Text(
-                        skippableClasses >= 0 ? "Can skip next $skippableClasses" : "Cannot skip",
+                        skippableClasses >= 0
+                            ? "Can skip next $skippableClasses"
+                            : "Cannot skip",
                         style: TextStyle(
                           color: skippableClasses >= 0 ? Colors.greenAccent : Colors.redAccent,
                           fontWeight: FontWeight.bold,
@@ -195,48 +213,109 @@ class _AttendanceMarkerScreenState extends State<AttendanceMarkerScreen> {
                     ],
                   ),
                 ),
-                CircularPercentIndicator(
-                  radius: 45.0,
-                  lineWidth: 8.0,
-                  percent: percentage.clamp(0.0, 1.0),
-                  center: Text("${(percentage * 100).toStringAsFixed(0)}%", style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                  progressColor: percentage >= (subject.requiredPercentage / 100) ? Colors.green : Colors.orange,
-                  backgroundColor: Colors.white.withAlpha(50),
-                  circularStrokeCap: CircularStrokeCap.round,
+                const SizedBox(width: 12),
+                SizedBox(
+                  width: 90,
+                  height: 90,
+                  child: CircularPercentIndicator(
+                    radius: 45.0,
+                    lineWidth: 8.0,
+                    percent: percentage.clamp(0.0, 1.0),
+                    center: FittedBox(
+                      child: Text(
+                        "${(percentage * 100).toStringAsFixed(0)}%",
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    progressColor: percentage >= (subject.requiredPercentage / 100)
+                        ? Colors.green
+                        : Colors.orange,
+                    backgroundColor: Colors.white.withAlpha(50),
+                    circularStrokeCap: CircularStrokeCap.round,
+                  ),
                 ),
               ],
             ),
             const Divider(color: Colors.white24, height: 32),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(children: [
-                  const Text("Attended ", style: TextStyle(color: Colors.white70)),
-                  _buildIncrementButton(
-                      icon: Icons.remove,
-                      onPressed: subject.attended > 0
-                          ? () => _firestoreService.updateAttendance(subjectId: subject.id, attendedIncrement: -1)
-                          : null),
-                  _buildIncrementButton(
-                      icon: Icons.add,
-                      onPressed: () => _firestoreService.updateAttendance(subjectId: subject.id, attendedIncrement: 1)),
-                ]),
-                TextButton(
-                  onPressed: () => _firestoreService.deleteSubject(subject.id),
-                  child: const Text("Delete", style: TextStyle(color: Colors.redAccent)),
-                ),
-                Row(children: [
-                  const Text("Missed ", style: TextStyle(color: Colors.white70)),
-                  _buildIncrementButton(
-                      icon: Icons.remove,
-                      onPressed: subject.missed > 0
-                          ? () => _firestoreService.updateAttendance(subjectId: subject.id, missedIncrement: -1)
-                          : null),
-                  _buildIncrementButton(
-                      icon: Icons.add,
-                      onPressed: () => _firestoreService.updateAttendance(subjectId: subject.id, missedIncrement: 1)),
-                ]),
-              ],
+            LayoutBuilder(
+              builder: (context, constraints) {
+                if (constraints.maxWidth > 400) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(children: [
+                        const Text("Attended ", style: TextStyle(color: Colors.white70)),
+                        _buildIncrementButton(
+                          icon: Icons.remove,
+                          onPressed: subject.attended > 0
+                              ? () => _firestoreService.updateAttendance(subjectId: subject.id, attendedIncrement: -1)
+                              : null,
+                        ),
+                        _buildIncrementButton(
+                          icon: Icons.add,
+                          onPressed: () => _firestoreService.updateAttendance(subjectId: subject.id, attendedIncrement: 1),
+                        ),
+                      ]),
+                      TextButton(
+                        onPressed: () => _firestoreService.deleteSubject(subject.id),
+                        child: const Text("Delete", style: TextStyle(color: Colors.redAccent)),
+                      ),
+                      Row(children: [
+                        const Text("Missed ", style: TextStyle(color: Colors.white70)),
+                        _buildIncrementButton(
+                          icon: Icons.remove,
+                          onPressed: subject.missed > 0
+                              ? () => _firestoreService.updateAttendance(subjectId: subject.id, missedIncrement: -1)
+                              : null,
+                        ),
+                        _buildIncrementButton(
+                          icon: Icons.add,
+                          onPressed: () => _firestoreService.updateAttendance(subjectId: subject.id, missedIncrement: 1),
+                        ),
+                      ]),
+                    ],
+                  );
+                } else {
+                  return Column(
+                    children: [
+                      Row(children: [
+                        const Text("Attended ", style: TextStyle(color: Colors.white70)),
+                        _buildIncrementButton(
+                          icon: Icons.remove,
+                          onPressed: subject.attended > 0
+                              ? () => _firestoreService.updateAttendance(subjectId: subject.id, attendedIncrement: -1)
+                              : null,
+                        ),
+                        _buildIncrementButton(
+                          icon: Icons.add,
+                          onPressed: () => _firestoreService.updateAttendance(subjectId: subject.id, attendedIncrement: 1),
+                        ),
+                      ]),
+                      const SizedBox(height: 8),
+                      Row(children: [
+                        const Text("Missed ", style: TextStyle(color: Colors.white70)),
+                        _buildIncrementButton(
+                          icon: Icons.remove,
+                          onPressed: subject.missed > 0
+                              ? () => _firestoreService.updateAttendance(subjectId: subject.id, missedIncrement: -1)
+                              : null,
+                        ),
+                        _buildIncrementButton(
+                          icon: Icons.add,
+                          onPressed: () => _firestoreService.updateAttendance(subjectId: subject.id, missedIncrement: 1),
+                        ),
+                      ]),
+                      TextButton(
+                        onPressed: () => _firestoreService.deleteSubject(subject.id),
+                        child: const Text("Delete", style: TextStyle(color: Colors.redAccent)),
+                      ),
+                    ],
+                  );
+                }
+              },
             )
           ],
         ),

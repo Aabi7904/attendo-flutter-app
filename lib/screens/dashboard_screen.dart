@@ -42,14 +42,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
               final subjects = subjectSnapshot.data ?? [];
               final totalSubjects = subjects.length;
 
-              // --- UPDATED CALCULATIONS ---
               final totalAttended = subjects.fold(0, (sum, item) => sum + item.attended);
               final totalMissed = subjects.fold(0, (sum, item) => sum + item.missed);
               final totalClasses = totalAttended + totalMissed;
-              
+
               final overallPercentage = totalClasses > 0 ? totalAttended / totalClasses : 0.0;
-              
-              // Calculate total skippable classes by summing them up from each subject
+
               int totalSkippableClasses = 0;
               for (var subject in subjects) {
                 final totalForSubject = subject.attended + subject.missed;
@@ -86,7 +84,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Welcome Header
           Text(
             "Hello,",
             style: Theme.of(context)
@@ -102,10 +99,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 24),
-          // Attendance Summary Card
           _buildAttendanceCard(attendancePercentage),
           const SizedBox(height: 24),
-          // Other Stats
           Row(
             children: [
               Expanded(
@@ -122,6 +117,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
+  // ✅ UPDATED THIS METHOD TO FIX OVERFLOW
   Widget _buildAttendanceCard(double percentage) {
     return Container(
       padding: const EdgeInsets.all(20),
@@ -141,39 +137,49 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ],
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Overall Attendance",
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(color: Colors.white),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                "Keep it up!",
-                style: TextStyle(color: Colors.white.withAlpha(200)),
-              ),
-            ],
-          ),
-          CircularPercentIndicator(
-            radius: 45.0,
-            lineWidth: 8.0,
-            percent: percentage,
-            center: Text(
-              "${(percentage * 100).toStringAsFixed(0)}%",
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Overall Attendance",
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(color: Colors.white),
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "Keep it up!",
+                  style: TextStyle(color: Colors.white.withAlpha(200)),
+                ),
+              ],
             ),
-            progressColor: Colors.cyanAccent,
-            backgroundColor: Colors.white.withAlpha(50),
-            circularStrokeCap: CircularStrokeCap.round,
+          ),
+          const SizedBox(width: 12),
+          SizedBox(
+            width: 90,
+            height: 90,
+            child: CircularPercentIndicator(
+              radius: 45.0,
+              lineWidth: 8.0,
+              percent: percentage,
+              center: FittedBox(
+                child: Text(
+                  "${(percentage * 100).toStringAsFixed(0)}%",
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                ),
+              ),
+              progressColor: Colors.cyanAccent,
+              backgroundColor: Colors.white.withAlpha(50),
+              circularStrokeCap: CircularStrokeCap.round,
+            ),
           ),
         ],
       ),
