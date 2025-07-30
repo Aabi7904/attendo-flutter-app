@@ -1,16 +1,66 @@
-# attendo_app
 
-A new Flutter project.
+# Attendo App 📲
 
-## Getting Started
+A simple and efficient **Attendance Tracking App** built with **Flutter** and **Firebase**, designed to streamline attendance management for educators, students, and small organizations. The app currently serves **15+ active users** and is growing steadily! 🚀
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+![App Thumbnail](ScreenShots/thumbnail.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 📦 APK Download
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+👉 [Click here to download the latest APK](https://github.com/Aabi7904/attendo-flutter-app/releases/tag/v1.0.0)
+
+> ⚠️ Note: If installing the APK manually, ensure you have allowed installation from unknown sources on your device.
+
+---
+
+## 🔧 Tech Stack
+
+- **Flutter** (Cross-platform UI toolkit)
+- **Firebase Authentication** (Email/Password & Google Sign-In)
+- **Cloud Firestore** (Real-time database)
+- **Firebase Storage** (Image uploads)
+- **Push Notifications** (FCM - Coming Soon)
+
+---
+
+## ✨ Features
+
+✅ User Authentication (Login / Sign Up)  
+✅ Track daily attendance with subject-wise management  
+✅ Student & Teacher modes (custom roles)  
+✅ Realtime Firestore integration  
+✅ Responsive, clean UI (Material Design)  
+✅ Google Sign-In supported  
+✅ Easy attendance visualization  
+
+---
+
+## 🛠️ Installation (For Developers)
+
+```bash
+git clone "repo link"
+cd attendo_app
+flutter pub get
+flutter run
+```
+
+> Make sure you have Firebase connected using your own configuration files.
+
+---
+
+## 🔗 Connect with Me
+
+- GitHub: [@harishaabitheen](https://github.com/Aabi7904)  
+- LinkedIn: [Harish Aabitheen J](https://www.linkedin.com/in/harishaabi)  
+
+---
+
+## 📢 Feedback & Contributions
+
+Feel free to raise issues or contribute via pull requests. I’m open to suggestions to improve the app further!
+
+---
+
+Made with ❤️ by **Harish Aabitheen J**
