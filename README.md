@@ -5,7 +5,7 @@ A simple and efficient **Attendance Tracking App** built with **Flutter** and **
 
 ---
 
-![App Thumbnail](ScreenShots/thumbnail.png)
+![App Thumbnail](assets/app_icon.png)
 
 ## 📦 APK Download
 
